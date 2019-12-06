@@ -1,4 +1,3 @@
-package Ex1Testing;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -63,7 +62,7 @@ class Functions_GUITest {
 
 	@Test
 	void testDrawFunctionsIntIntRangeRangeInt() {
-		_data.drawFunctions();
+		//_data.drawFunctions();
 		//fail("Not yet implemented");
 	}
 	public static Functions_GUI FunctionsFactory() {
@@ -79,26 +78,26 @@ class Functions_GUITest {
 			cf3.mul(new Polynom(s3[i]));
 		}
 		
-		ComplexFunction cf = new ComplexFunction("plus", p1,p2);
-		ComplexFunction cf4 = new ComplexFunction("div", new Polynom("x +1"),cf3);
-		cf4.plus(new Monom("2"));
-		ans.add(cf.copy());
-		ans.add(cf4.copy());
-		cf.div(p1);
-		ans.add(cf.copy());
-		String s = cf.toString();
-		function cf5 = cf4.initFromString(s1);
-		function cf6 = cf4.initFromString(s2);
-		ans.add(cf5.copy());
-		ans.add(cf6.copy());
-		ComplexFunction max = new ComplexFunction(ans.get(0).copy());
-		ComplexFunction min = new ComplexFunction(ans.get(0).copy());
+		//ComplexFunction cf = new ComplexFunction("plus", p1,p2);
+		//ComplexFunction cf4 = new ComplexFunction("div", new Polynom("x +1"),cf3);
+		//cf4.plus(new Monom("2"));
+		//ans.add(cf.copy());
+		//ans.add(cf4.copy());
+		//cf.div(p1);
+		//ans.add(cf.copy());
+		//String s = cf.toString();
+		//function cf5 = cf4.initFromString(s1);
+		//function cf6 = cf4.initFromString(s2);
+		//ans.add(cf5.copy());
+		//ans.add(cf6.copy());
+		//ComplexFunction max = new ComplexFunction(ans.get(0).copy());
+		//ComplexFunction min = new ComplexFunction(ans.get(0).copy());
 		for(int i=1;i<ans.size();i++) {
-			max.max(ans.get(i));
-			min.min(ans.get(i));
+			//max.max(ans.get(i));
+			//min.min(ans.get(i));
 		}
-		ans.add(max);
-		ans.add(min);
+		//ans.add(max);
+		//ans.add(min);
 		
 		return ans;
 	}

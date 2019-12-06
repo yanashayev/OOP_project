@@ -141,6 +141,8 @@ public class Monom implements function{
 	private static Monom getNewZeroMonom() {return new Monom(ZERO);}
 	private double _coefficient; 
 	private int _power;
+
+
 	@Override
 	public function initFromString(String s) {
 		Monom m= new Monom(s);
@@ -151,8 +153,8 @@ public class Monom implements function{
 
 	@Override
 	public function copy() {
-		// TODO Auto-generated method stub
-		return null;
+		return initFromString(this.toString());
+
 	}
 	
 	
