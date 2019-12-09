@@ -2,12 +2,33 @@ package Ex1;
 
 import java.util.Objects;
 
-public class ComplexFunction implements complex_function {
 
-	private Operation op=Operation.None; //HAVE TO BE STRING
+public class ComplexFunction implements complex_function {
+	public static void main(String arg[]){
+		String s="mul(3x+3+4+5x+x^2,7x)";
+		ComplexFunction f= new ComplexFunction(s);
+		function p = f.initFromString(s);
+		System.out.println(p);
+	}
+
+	private Operation op; //HAVE TO BE STRING
 	private function left, right=null;
-	private ComplexFunction() {
-		
+	public ComplexFunction() {
+		op = Operation.None;
+		left = new Polynom();
+		right = new Polynom();
+	}
+	public ComplexFunction(String s){
+		ComplexFunction c =(ComplexFunction) initFromString(s);
+		this.op=c.op;
+		this.left=c.left;
+		this.right=c.right;
+	}
+	public ComplexFunction(String op, function left, function right) {
+		this.op=checkWhichOperation(op);
+		this.left=left;
+		this.right=right;
+
 	}
 	public ComplexFunction(Operation op, function left, function right) {
 		this.op=op;
@@ -27,6 +48,10 @@ public class ComplexFunction implements complex_function {
 	public ComplexFunction(Operation op, function left) {
 		this.left=left;
 		this.op=op;
+	}
+	public ComplexFunction(String op, function left) {
+		this.left=left;
+		this.op=checkWhichOperation(op);
 	}
 
 	@Override
@@ -67,68 +92,76 @@ public class ComplexFunction implements complex_function {
 		return t;
 	}
 	public String stringLeft(String s) {
+		int counter=0;
+		int start=0;
 		int end=0;
-		int start=s.indexOf('(');
-		int counter=1;
-		for (int i=start+1;i<s.length();i++) {
-			if(s.charAt(i)=='(') {
-				counter++;
+		 for(int i=0;(i<s.length());i++){
+		 	if(s.charAt(i)=='('){
+		 		counter++;
+		 		if(start==0){
+		 			start=i+1;
+				}
 			}
-			if (s.charAt(i)==',') {
-				counter--;
+		 	if(s.charAt(i)==','){
+		 		counter--;
+		 		if(counter==0){
+		 			end=i;
+		 			break;
+				}
 			}
-			if(counter==0) {
-				end=s.charAt(i);
-				
-			}
-		}
-		
-		return s.substring(start+1, end-1);
+		 }
+
+		return s.substring(start,end);
+
+
 	}
 	public String stringRight(String s) {
+		int counter=0;
+		int start=0;
 		int end=0;
-		int start=s.indexOf('(');
-		int counter=1;
-		for (int i=start+1;i<s.length();i++) {
-			if(s.charAt(i)=='(') {
+		for(int i=0;(i<s.length());i++){
+			if(s.charAt(i)=='('){
 				counter++;
+				if(start==0){
+					start=i+1;
+				}
 			}
-			if (s.charAt(i)==',') {
+			if(s.charAt(i)==','){
 				counter--;
-			}
-			if(counter==0) {
-				end=s.charAt(i);
-				
+				if(counter==0){
+					end=i;
+					break;
+				}
 			}
 		}
-		return s.substring(end+1, s.length());
-			
-		
+
+		return s.substring(end+1,s.length()-1);
+
+
+
 	}
 	public Operation checkWhichOperation(String s){
-		switch(s.charAt(0)){
-			case 'P': {
+		s=s.toLowerCase();
+		switch(s){
+			case ("plus"): {
 				return Operation.Plus;
 			}
-			case 'T': {
+			case ("mul"): {
 				return Operation.Times;
 			}
-			case 'D': {
+			case ("div"): {
 				return  Operation.Divid;
 			}
-			case 'M': {
-				if (s.charAt(1)=='a') {
-					return Operation.Max;
-				}
-				else{
-					return Operation.Min;
-				}
-
+			case ("max"): {
+				return Operation.Max;
 			}
-			case 'C': {
+			case ("min"):{
+				return Operation.Min;
+			}
+			case ("comp"): {
 				return Operation.Comp;
 			}
-			case 'N': {
+			case (""): {// change need to be without operation
 				return Operation.None;
 			}
 			default:{
@@ -146,15 +179,41 @@ public class ComplexFunction implements complex_function {
 
 		}
 		ComplexFunction f= new ComplexFunction();
+
+
 		String operation= stringOp(s);
 		String left=stringLeft(s);
 		String right=stringRight(s);
+
+
 		f.op=checkWhichOperation(operation);
-		f.right=initFromString(right);
-		f.left=initFromString(left);
+		if (isPoly(right)){
+			f.right = new Polynom(right);
+		}
+		else {
+			f.right = new ComplexFunction();
+			f.right=initFromString(right);
+		}
+		if (isPoly(left)){
+			f.left = new Polynom(left);
+		}
+		else {
+			f.left = new ComplexFunction();
+			f.left=initFromString(left);
+		}
+
 		return f;
 
 
+	}
+
+	private boolean isPoly(String s){
+		try{
+			new Polynom(s);
+			return true;
+		} catch (Exception x){
+			return false;
+		}
 	}
 
 	@Override

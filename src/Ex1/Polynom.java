@@ -59,7 +59,7 @@ public class Polynom implements Polynom_able{
 	public String toString () {
 		String ans="";
 		for (int i=0; i<List.size(); i++) {
-			ans+= List.get(i).toString()+ "+";
+			ans+= List.get(i).toString();
 		}
 		return ans;
 	}
@@ -157,10 +157,10 @@ public class Polynom implements Polynom_able{
 	}
 
 	@Override
-	public boolean equals(Object p1) { //LEKAABEL OBJECT
+	public boolean equals(Object obj) { //LEKAABEL OBJECT
 		// TODO Auto-generated method stub
-		if (!(p1 instanceof Polynom)) {return false;}
-		Polynom p2= (Polynom) p1;
+		if (!(obj instanceof Polynom_able || obj instanceof Monom|| obj instanceof Polynom)) {return false;}
+		Polynom p2= (Polynom) obj;
 		Iterator <Monom> it1= iteretor();
 		Iterator <Monom> it2= p2.iteretor();
 		while (it1.hasNext() && it2.hasNext()) {

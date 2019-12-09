@@ -1,18 +1,60 @@
 package Ex1;
 
-import java.io.IOException;
+import java.io.*;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.LinkedList;
 
 public class Functions_GUI implements functions {
+    private LinkedList<function> list;
     @Override
     public void initFromFile(String file) throws IOException {
+        String line = "";
+        try
+        {
+            BufferedReader br = new BufferedReader(new FileReader(file));
+
+            while ((line = br.readLine()) != null)
+            {
+                String[] stringOfFunction = line.split("\n");
+                for(int i=0; i<stringOfFunction.length;i++){
+                    ComplexFunction f= new ComplexFunction();
+                   list.add(f.initFromString(stringOfFunction[i])) ;
+
+                }
+
+            }
+
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+            System.out.println("could not read file");
+        }
+
 
     }
 
     @Override
     public void saveToFile(String file) throws IOException {
+        String newFile="";
+        Iterator<function> it = list.iterator();
+        while(it.hasNext()){
+            function f = it.next();
+            newFile+=f+"\n";
+        }
+        try
+        {
+            PrintWriter pw = new PrintWriter(new File(file));
 
+            pw.write(newFile);
+            pw.close();
+        }
+        catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+            return;
+        }
     }
 
     @Override
@@ -27,66 +69,64 @@ public class Functions_GUI implements functions {
 
     @Override
     public int size() {
-        return 0;
+        return list.size();
     }
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return list.isEmpty();
     }
 
     @Override
     public boolean contains(Object o) {
-        return false;
+        return list.contains(o);
     }
 
     @Override
     public Iterator<function> iterator() {
-        return null;
+        return list.iterator();
     }
 
     @Override
     public Object[] toArray() {
-        return new Object[0];
+        return list.toArray();
     }
 
     @Override
     public <T> T[] toArray(T[] a) {
-        return null;
+        return list.toArray(a);
     }
 
     @Override
     public boolean add(function function) {
-        return false;
+        return list.add(function);
     }
 
     @Override
-    public boolean remove(Object o) {
-        return false;
-    }
+    public boolean remove(Object o) { return list.remove(o); }
 
     @Override
     public boolean containsAll(Collection<?> c) {
-        return false;
+        return list.containsAll(c);
     }
 
     @Override
     public boolean addAll(Collection<? extends function> c) {
-        return false;
+        return list.addAll(c);
     }
 
     @Override
     public boolean removeAll(Collection<?> c) {
-        return false;
+        return list.removeAll(c);
     }
 
     @Override
     public boolean retainAll(Collection<?> c) {
-        return false;
+        return list.retainAll(c);
     }
 
     @Override
     public void clear() {
-
+list.clear();
     }
 }
