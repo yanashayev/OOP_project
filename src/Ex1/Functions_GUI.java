@@ -4,6 +4,10 @@ import java.io.*;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.awt.Graphics;
+import java.awt.Color;
+import java.awt.Font;
+
 
 public class Functions_GUI implements functions {
     private LinkedList<function> list;
@@ -43,6 +47,7 @@ public class Functions_GUI implements functions {
             function f = it.next();
             newFile+=f+"\n";
         }
+
         try
         {
             PrintWriter pw = new PrintWriter(new File(file));
@@ -59,8 +64,13 @@ public class Functions_GUI implements functions {
 
     @Override
     public void drawFunctions(int width, int height, Range rx, Range ry, int resolution) {
+// rescale the coordinate system
+        StdDraw.setXscale(rx.get_min(), rx.get_max());
+        StdDraw.setYscale(ry.get_min(), ry.get_max());
+
 
     }
+
 
     @Override
     public void drawFunctions(String json_file) {

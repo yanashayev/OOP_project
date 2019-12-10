@@ -63,7 +63,7 @@ public class MonomTest {
 		Monom m1 = new Monom ("3x^2");
 		Monom m2 = new Monom ("8x^6");
 		m1.add(m2);
-		m1.sub(m2);
+		//m1.sub(m2);
 		System.out.println("add: "+ m1.toString());
 		System.out.println("sub: "+ m1.toString());
 		System.out.println("derivative: "+ m1.derivative().toString());

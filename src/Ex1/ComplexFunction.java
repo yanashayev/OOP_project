@@ -5,10 +5,10 @@ import java.util.Objects;
 
 public class ComplexFunction implements complex_function {
 	public static void main(String arg[]){
-		String s="mul(3x+3+4+5x+x^2,7x)";
+		String s="mul(min(21x,7x),8x))";
 		ComplexFunction f= new ComplexFunction(s);
-		function p = f.initFromString(s);
-		System.out.println(p);
+		System.out.println(f.toString());
+		System.out.println(f.f(1));
 	}
 
 	private Operation op; //HAVE TO BE STRING
@@ -135,7 +135,7 @@ public class ComplexFunction implements complex_function {
 			}
 		}
 
-		return s.substring(end+1,s.length()-1);
+		return s.substring(end+1,s.length()-2);
 
 
 
@@ -297,10 +297,8 @@ public class ComplexFunction implements complex_function {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false; // not the same object
 		ComplexFunction that = (ComplexFunction) o; //casting to complex function CAN I?????
-		for(int i=0;i<100;i++){
+		for(int i=-100;i<100;i++){
 			if (this.f(i)!=that.f(i)) return false;
-			double negative= (-1)*i;
-			if(this.f(negative)!=that.f(negative)) return false;
 		}
 		return true;
 	}
