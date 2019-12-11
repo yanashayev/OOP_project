@@ -93,6 +93,7 @@ public class Monom implements function {
 	 * @param s represent a monom as a string.
 	 */
 	public Monom(String s) {
+		s=s.replaceAll(" ", "");
 		// scan the string in order to check if there is an illegal sign.
 		for (int i = 0; i < s.length(); i++)
 			if (!((s.charAt(i) >= '0' && s.charAt(i) <= '9') || s.charAt(i) == 'x' || s.charAt(i) == '^'
