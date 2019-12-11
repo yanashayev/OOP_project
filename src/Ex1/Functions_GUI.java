@@ -6,9 +6,9 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.awt.Color;
 import java.awt.Font;
-
+import com.google.gson.*;
+import java.io.Reader;
 import jdk.nashorn.internal.parser.JSONParser;
-import org.json.*;
 
 
 public class Functions_GUI implements functions {
@@ -155,6 +155,21 @@ public class Functions_GUI implements functions {
 
     @Override
     public void drawFunctions(String json_file)  {
+        int width;
+        int height;
+        Range rx;
+        Range ry;
+        int resolution;
+        Gson gson = new Gson();
+        try {
+            FileReader reader = new FileReader(json_file);
+        }catch (Exception e){
+
+        }
+
+
+
+
 
     }
 

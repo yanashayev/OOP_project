@@ -8,7 +8,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library" scope="TEST">
+    <orderEntry type="module-library">
       <library name="JUnit5.4">
         <CLASSES>
           <root url="jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter/5.4.2/junit-jupiter-5.4.2.jar!/" />
@@ -37,7 +37,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Documents/New folder/json-simple-1.1.1.jar!/" />
+          <root url="jar://$USER_HOME$/Documents/New folder/gson-2.8.6.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
