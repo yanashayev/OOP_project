@@ -47,7 +47,7 @@ public class Functions_GUI implements functions {
         d.add(new ComplexFunction("x^2"));
         d.add(new ComplexFunction("x ^3"));
         d.drawFunctions(800,600,new Range(-10,10),new Range(-10,10),400);
-
+        d.drawFunctions("GUI_params.json");
     }
 
 
@@ -159,19 +159,20 @@ public class Functions_GUI implements functions {
     }
     @Override
     public void drawFunctions(String json_file)  {
-        int width;
-        int height;
-        Range rx;
-        Range ry;
-        int resolution;
+        // Make JSON!!
         Gson gson = new Gson();
+        // Read from file
         try {
-            FileReader reader = new FileReader(json_file);
-        }catch (Exception e){
+            FileReader fr = new FileReader(json_file);
+            DF_params parameters = gson.fromJson(fr, DF_params.class);
+            Range rx = new Range(parameters.Range_X[0], parameters.Range_X[1]);
+            Range ry = new Range(parameters.Range_Y[0], parameters.Range_Y[1]);
+            drawFunctions(parameters.Width, parameters.Height, rx, ry, parameters.Resolution);
 
+        } catch (Exception e) {
+            e.printStackTrace();
+            return;
         }
-
-
 
 
 
