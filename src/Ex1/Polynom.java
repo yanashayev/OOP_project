@@ -262,7 +262,7 @@ public class Polynom implements Polynom_able {
 			}
 
 			if (this.f(x0) * this.f(x1) > 0) {
-				throw new RuntimeException("The values x0 and x1 arn't correct");
+				throw new RuntimeException(" x0 and x1 - both of them negative or positive");
 			}
 
 			double smallThenEps=((x0+x1)/2);
