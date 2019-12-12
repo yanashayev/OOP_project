@@ -16,41 +16,6 @@ public class Functions_GUI implements functions {
     public static Color[] Colors = {Color.blue, Color.cyan,
             Color.MAGENTA, Color.ORANGE, Color.red, Color.GREEN, Color.PINK};
 
-    public static void main(String[] args) {
-         Functions_GUI d = new Functions_GUI();
-
-         String s4="plus(-1.0x^4+2.4x^2+3.1,0.1x^5-1.2999999999999998x+5.0)";
-         String s3="plus(div(1.0x+1.0,mul(mul(1.0x+3.0,1.0x-2.0),1.0x-4.0)),2.0)";
-         String s0="div(plus(-1.0x^4+2.4x^2+3.1,0.1x^5-1.2999999999999998x+5.0),-1.0x^4+2.4x^2+3.1)";
-         String s5="-1.0x^4+2.4x^2+3.1";
-         String s6="0.1x^5-1.2999999999999998x+5.0";
-         String s7="max(max(max(max(plus(-1.0x^4+2.4x^2+3.1,0.1x^5-1.2999999999999998x+5.0),plus(div(1.0x+1.0,mul(mul(1.0x+3.0,1.0x-2.0),1.0x-4.0)),2.0)),div(plus(-1.0x^4+2.4x^2+3.1,0.1x^5-1.2999999999999998x+5.0),-1.0x^4+2.4x^2+3.1)),-1.0x^4+2.4x^2+3.1),0.1x^5-1.2999999999999998x+5.0)";
-         String s8="min(min(min(min(plus(-1.0x^4+2.4x^2+3.1,0.1x^5-1.2999999999999998x+5.0),plus(div(1.0x+1.0,mul(mul(1.0x+3.0,1.0x-2.0),1.0x-4.0)),2.0)),div(plus(-1.0x^4+2.4x^2+3.1,0.1x^5-1.2999999999999998x+5.0),-1.0x^4+2.4x^2+3.1)),-1.0x^4+2.4x^2+3.1),0.1x^5-1.2999999999999998x+5.0)";
-
-         ComplexFunction f4= new ComplexFunction(s4);
-         d.add(f4);
-        ComplexFunction f0= new ComplexFunction(s0);
-        d.add(f0);
-        ComplexFunction f3= new ComplexFunction(s3);
-        d.add(f3);
-        ComplexFunction f5= new ComplexFunction(s5);
-        d.add(f5);
-        ComplexFunction f6= new ComplexFunction(s6);
-        d.add(f6);
-        ComplexFunction f7= new ComplexFunction(s7);
-        d.add(f7);
-        ComplexFunction f8= new ComplexFunction(s8);
-        d.add(f8);
-
-        d.add(new ComplexFunction("x"));
-        d.add(new ComplexFunction("2x"));
-        d.add(new ComplexFunction("x^2"));
-        d.add(new ComplexFunction("x ^3"));
-        d.drawFunctions(800,600,new Range(-10,10),new Range(-10,10),400);
-        d.drawFunctions("GUI_params.json");
-    }
-
-
     @Override
     public void initFromFile(String file) throws IOException {
         String line = "";
@@ -66,7 +31,7 @@ public class Functions_GUI implements functions {
                    list.add(f.initFromString(stringOfFunction[i])) ;
 
                 }
-
+                br.close();
             }
 
         }
@@ -209,8 +174,8 @@ public class Functions_GUI implements functions {
     }
 
     @Override
-    public boolean add(function function) {
-        return list.add(function);
+    public boolean add(function f) {
+        return list.add(f);
     }
 
     @Override

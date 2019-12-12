@@ -85,8 +85,6 @@ public class Monom implements function {
 		return this.get_coefficient() == 0;
 	}
 
-	// ***************** add your code below **********************
-
 	/**
 	 * function thats get monom as a string, and define a coefficient and power.
 	 *

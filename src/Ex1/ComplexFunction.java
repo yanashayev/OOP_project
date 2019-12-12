@@ -4,39 +4,8 @@ import java.util.Objects;
 
 
 public class ComplexFunction implements complex_function {
-	public static void main(String arg[]){
-		String py= "Plus(2x,3x)";
-		ComplexFunction g=new ComplexFunction();
-		g.initFromString(py);
-		System.out.println(g.toString());
-		String s="mul(min(21x,7x),8x+1)";
-		ComplexFunction f= new ComplexFunction(s);
-		System.out.println(f.toString());
-		System.out.println(f.f(1));
 
-		Monom m = new Monom("2x");
-		Polynom p = new Polynom("2x^2");
-		ComplexFunction cf = new ComplexFunction(Operation.Plus,p,m);
-		System.out.println(cf.toString());
-
-		ComplexFunction r = new ComplexFunction(Operation.Times,cf,m);
-		System.out.println(r);
-
-//		ComplexFunction cc = new ComplexFunction(cf.copy());
-//		System.out.println(cc.toString());
-//		String s4="plus(-1.0x^4+2.4x^2+3.1,0.1x^5-1.2999999999999998x+5.0)";
-//		String s3="plus(div(1.0x+1.0,mul(mul(1.0x+3.0,1.0x-2.0),1.0x-4.0)),2.0)";
-//		String s0="div(plus(-1.0x^4+2.4x^2+3.1,0.1x^5-1.2999999999999998x+5.0),-1.0x^4+2.4x^2+3.1)";
-//		String s5="-1.0x^4+2.4x^2+3.1";
-//		String s6="0.1x^5-1.2999999999999998x+5.0";
-//		String s7="max(max(max(max(plus(-1.0x^4+2.4x^2+3.1,0.1x^5-1.2999999999999998x+5.0),plus(div(1.0x+1.0,mul(mul(1.0x+3.0,1.0x-2.0),1.0x-4.0)),2.0)),div(plus(-1.0x^4+2.4x^2+3.1,0.1x^5-1.2999999999999998x+5.0),-1.0x^4+2.4x^2+3.1)),-1.0x^4+2.4x^2+3.1),0.1x^5-1.2999999999999998x+5.0)";
-//		String s8="min(min(min(min(plus(-1.0x^4+2.4x^2+3.1,0.1x^5-1.2999999999999998x+5.0),plus(div(1.0x+1.0,mul(mul(1.0x+3.0,1.0x-2.0),1.0x-4.0)),2.0)),div(plus(-1.0x^4+2.4x^2+3.1,0.1x^5-1.2999999999999998x+5.0),-1.0x^4+2.4x^2+3.1)),-1.0x^4+2.4x^2+3.1),0.1x^5-1.2999999999999998x+5.0)";
-//ComplexFunction f4= new ComplexFunction(s4);
-//		System.out.println(f4.toString());
-
-	}
-
-	private Operation op= Operation.None; //HAVE TO BE STRING
+	private Operation op= Operation.None;
 	private function left, right=null;
 	public ComplexFunction() {
 
