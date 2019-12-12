@@ -31,9 +31,9 @@ public class Functions_GUI implements functions {
                    list.add(f.initFromString(stringOfFunction[i])) ;
 
                 }
-                br.close();
-            }
 
+            }
+            br.close();
         }
         catch (IOException e)
         {

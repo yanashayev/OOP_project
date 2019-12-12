@@ -46,7 +46,7 @@ class Functions_GUITest {
 		}
 		catch(Exception e) {e.printStackTrace();}
 		
-		String JSON_param_file = "GUI_params.txt";
+		String JSON_param_file = "GUI_params.json";
 		data.drawFunctions(JSON_param_file);
 	}
 	private functions _data=null;
