@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.util.Iterator;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -31,10 +32,10 @@ import Ex1.functions;
 class Functions_GUITest {
 	public static void main(String[] a) throws IOException {
 		functions data = FunctionsFactory();
-	//	int w=1000, h=600, res=200;
-	//	Range rx = new Range(-10,10);
-	//	Range ry = new Range(-5,15);
-//		data.drawFunctions(w,h,rx,ry,res);
+	   int w=1000, h=600, res=200;
+		Range rx = new Range(-10,10);
+		Range ry = new Range(-5,15);
+     	data.drawFunctions(w,h,rx,ry,res);
 		String file = "function_file.txt";
 		String file2 = "function_file2.txt";
 		try {
@@ -49,42 +50,76 @@ class Functions_GUITest {
 		data.drawFunctions(JSON_param_file);
 	}
 	private functions _data=null;
-//	@BeforeAll
-//	static void setUpBeforeClass() throws Exception {
-//	}
+
+	@BeforeAll
+	static void setUpBeforeClass() throws Exception {
+
+	}
 
 	@BeforeEach
 	void setUp() throws Exception {
 		_data = FunctionsFactory();
 	}
 
-	//@Test
+	@Test
 	void testFunctions_GUI() {
-	//	fail("Not yet implemented");
+ 	Functions_GUI gg= new Functions_GUI();
+	gg.addAll(_data);
+	gg.drawFunctions();
+
 	}
 
-	//@Test
+	@Test
 	void testInitFromFile() {
-	//	fail("Not yet implemented");
+		Functions_GUI gg = new Functions_GUI();
+		//gg.add(new Polynom("x"));
+		//gg.add(new ComplexFunction("plus(x,x)"));
+		try {
+			gg.saveToFile("myFile");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		gg.clear();
+		try {
+			gg.initFromFile("myFile");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		gg.drawFunctions();
+
 	}
 
-	//@Test
+	@Test
 	void testSaveToFile() {
-		
-		
+		Functions_GUI gg = new Functions_GUI();
+		gg.add(new Polynom("x"));
+		gg.add(new ComplexFunction("plus(x,x)"));
+		try {
+			gg.saveToFile("myFile");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		gg.clear();
+		try {
+			gg.initFromFile("myFile");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		gg.drawFunctions();
+
 	}
 
-	//@Test
+	@Test
 	void testDrawFunctions() {
-		//_data.drawFunctions();
-	//	fail("Not yet implemented");
+		((Functions_GUI)_data).drawFunctions();
+
 	}
 
 	@Test
 	void testDrawFunctionsIntIntRangeRangeInt() throws IOException {
 		_data.drawFunctions("GUI_params.txt");
-		//fail("Not yet implemented");
 	}
+
 	public static functions FunctionsFactory() {
 		functions ans = new Functions_GUI();
 		String s1 = "3.1 +2.4x^2 -x^4";

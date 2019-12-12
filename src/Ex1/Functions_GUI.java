@@ -153,7 +153,10 @@ public class Functions_GUI implements functions {
        }
     }
 
+    public void drawFunctions(){
+        drawFunctions(800, 800, new Range(-10,10), new Range (-10,10),400 );
 
+    }
     @Override
     public void drawFunctions(String json_file)  {
         int width;
