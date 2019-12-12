@@ -199,15 +199,19 @@ public class Polynom implements Polynom_able {
 	@Override
 	public void substract(Polynom_able p1) {
 		if (p1 instanceof Polynom) {
+			Polynom n = (Polynom) p1;
+			if (this.equals(n)) {
+				this.polynom.removeAll(polynom);
+				return;
+			}
 			// adding a (-1)* polynom
-			Polynom p = (Polynom) p1;
+			Polynom p = (Polynom) n;
 			Iterator<Monom> it = p.iteretor();
 			while (it.hasNext()) {
 				it.next().multipy(new Monom("-1"));
 			}
 			this.add(p1);
 		}
-
 	}
 
 	@Override
@@ -241,23 +245,42 @@ public class Polynom implements Polynom_able {
 
 	@Override
 	public double root(double x0, double x1, double eps) {
-		// enter condition
-		if (this.f(x0) * this.f(x1) > 0)
-			throw new RuntimeException("Both f(x0) and f(x1) are positive/negative");
-		/*
-		 * we use Newton's method in order to find the y value of eps. Newton's method :
-		 * xn+1=xn - (f(xn)/f'(xn))
-		 */
-		double start = Math.pow(eps, 2);
-		double x2 = 0;
-		while (Math.abs(this.f(start)) > eps) {
-			x2 = start - (this.f(start) / this.derivative().f(start));
-			start = x2;
-		}
-		return start;
-	}
 
-	@Override
+			if (this.f(x0) * this.f(x1) == 0) {
+				if (this.f(x0) == 0) {
+					return x0;
+				}
+				else {
+					return x1;
+				}
+			}
+			if (this.isZero()) {
+				return x0;
+			}
+			if (f(0) == 0) {
+				return 0;
+			}
+
+			if (this.f(x0) * this.f(x1) > 0) {
+				throw new RuntimeException("The values x0 and x1 arn't correct");
+			}
+
+			double smallThenEps=((x0+x1)/2);
+			while (Math.abs(this.f(smallThenEps))>eps) {
+				if (this.f(smallThenEps)*this.f(x0)<0) {
+					x1=smallThenEps;
+				}
+				else {
+					x0=smallThenEps;
+				}
+				smallThenEps=((x0+x1)/2);
+			}
+
+			return smallThenEps;
+		}
+
+
+		@Override
 	public Polynom_able copy() {
 		Polynom t = new Polynom();
 		Iterator<Monom> it = this.polynom.iterator();
@@ -349,22 +372,30 @@ public class Polynom implements Polynom_able {
 
 
 	@Override
-	public boolean equals(Object obj) { //LEKAABEL OBJECT
-		// TODO Auto-generated method stub
-		if (!(obj instanceof Polynom_able || obj instanceof Monom|| obj instanceof Polynom)) {return false;}
-		Polynom p2= (Polynom) obj;
-		Iterator <Monom> it1= iteretor();
-		Iterator <Monom> it2= p2.iteretor();
-		while (it1.hasNext() && it2.hasNext()) {
-			Monom temp1=it1.next();
-			Monom temp2=it2.next();
-			if (temp1.get_coefficient() != temp2.get_coefficient() || temp1.get_power()!= temp2.get_power()) {
+	public boolean equals(Object p1) {
+		if (p1 instanceof Polynom) {
+			Polynom p = (Polynom) p1;
+			Iterator<Monom> itp1 = p.polynom.iterator();
+			Iterator<Monom> it = this.polynom.iterator();
+			if (p.polynom.size() != this.polynom.size())
 				return false;
-			}
-			return true;
-		}
+			while (itp1.hasNext() && it.hasNext()) {
+				Monom tmp1 = it.next();
+				Monom tmp2 = itp1.next();
 
-		return false;
+				if ((!coefequals(tmp1, tmp2)) || tmp1.get_power() != tmp2.get_power())
+					return false;
+			}
+		}
+		return true;
+	}
+
+	public boolean coefequals(Monom tmp1, Monom tmp2) {
+		if (tmp1.get_coefficient() > tmp2.get_coefficient() - 0.000001
+				&& tmp1.get_coefficient() < tmp2.get_coefficient() + 0.000001)
+			return true;
+		else
+			return false;
 	}
 
 

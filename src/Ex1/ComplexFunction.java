@@ -5,7 +5,11 @@ import java.util.Objects;
 
 public class ComplexFunction implements complex_function {
 	public static void main(String arg[]){
-		String s="mul(min(21x,7x),8x))";
+		String py= "Plus(2x,3x)";
+		ComplexFunction g=new ComplexFunction();
+		g.initFromString(py);
+		System.out.println(g.toString());
+		String s="mul(min(21x,7x),8x+1)";
 		ComplexFunction f= new ComplexFunction(s);
 		System.out.println(f.toString());
 		System.out.println(f.f(1));
@@ -96,6 +100,7 @@ public class ComplexFunction implements complex_function {
 		}
 	}
 
+
 	@Override
 	public double f(double x) {
 
@@ -127,7 +132,9 @@ public class ComplexFunction implements complex_function {
 		}
 	}
 
-	public String stringOp (String s) {
+
+
+	private String stringOp (String s) {
 		String t="";
 		int i=0;
 		while(i<s.length()&&s.charAt(i)!='(') {
@@ -136,7 +143,7 @@ public class ComplexFunction implements complex_function {
 		}
 		return t;
 	}
-	public String stringLeft(String s) {
+	private String stringLeft(String s) {
 		int counter=0;
 		int start=0;
 		int end=0;
@@ -159,10 +166,12 @@ public class ComplexFunction implements complex_function {
 		return s.substring(start,end);
 
 
-	}public String stringRight(String s) {
+	}
+	private String stringRight(String s) {
 		int counter=0;
 		int start=0;
 		int end=0;
+		int length=s.length();
 		for(int i=0;(i<s.length());i++){
 			if(s.charAt(i)=='('){
 				counter++;
@@ -179,12 +188,12 @@ public class ComplexFunction implements complex_function {
 			}
 		}
 
-		return s.substring(end+1,s.length()-2);
+		return s.substring(end+1,length-1);
 
 
 
 	}
-	public Operation checkWhichOperation(String s){
+	private Operation checkWhichOperation(String s){
 		s=s.toLowerCase();
 		switch(s){
 			case ("plus"): {
@@ -213,6 +222,8 @@ public class ComplexFunction implements complex_function {
 			}
 		}
 	}
+
+
 
 	@Override
 	public function initFromString(String s) {
@@ -273,6 +284,7 @@ public class ComplexFunction implements complex_function {
 		}
 	}
 
+
 	@Override
 	public void plus(function f1) {
 		function temp = this.copy();
@@ -281,6 +293,7 @@ public class ComplexFunction implements complex_function {
 		this.left=temp;
 
 	}
+
 
 	@Override
 	public void mul(function f1) { //MULTIPLY
@@ -291,6 +304,7 @@ public class ComplexFunction implements complex_function {
 
 	}
 
+
 	@Override
 	public void div(function f1) {
 		function temp= this.copy();
@@ -299,6 +313,7 @@ public class ComplexFunction implements complex_function {
 		this.left=temp;
 
 	}
+
 
 	@Override
 	public void max(function f1) {

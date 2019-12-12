@@ -7,8 +7,7 @@ import java.util.LinkedList;
 import java.awt.Color;
 import java.awt.Font;
 import com.google.gson.*;
-import java.io.Reader;
-import jdk.nashorn.internal.parser.JSONParser;
+
 
 
 public class Functions_GUI implements functions {
@@ -51,6 +50,7 @@ public class Functions_GUI implements functions {
 
     }
 
+
     @Override
     public void initFromFile(String file) throws IOException {
         String line = "";
@@ -78,6 +78,7 @@ public class Functions_GUI implements functions {
 
 
     }
+
 
     @Override
     public void saveToFile(String file) throws IOException {
